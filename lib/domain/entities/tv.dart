@@ -1,57 +1,57 @@
 import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable
-class Movie extends Equatable {
-  Movie({
-    required this.adult,
+class Tv extends Equatable {
+  Tv({
     required this.backdropPath,
+    required this.firstAirDate,
     required this.genreIds,
     required this.id,
-    required this.originalTitle,
+    required this.name,
+    required this.originCountry,
+    required this.originalLanguage,
+    required this.originalName,
     required this.overview,
     required this.popularity,
     required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  Movie.watchlist({
-    required this.id,
-    required this.overview,
-    required this.posterPath,
-    required this.title,
-  });
-
-  bool? adult;
   String? backdropPath;
+  DateTime? firstAirDate;
   List<int>? genreIds;
-  int id;
-  String? originalTitle;
+  int? id;
+  String? name;
+  List<String>? originCountry;
+  String? originalLanguage;
+  String? originalName;
   String? overview;
   double? popularity;
   String? posterPath;
-  String? releaseDate;
-  String? title;
-  bool? video;
   double? voteAverage;
   int? voteCount;
 
+  Tv.watchlist({
+    required this.id,
+    required this.overview,
+    required this.posterPath,
+    required this.name,
+  });
+
   @override
   List<Object?> get props => [
-        adult,
         backdropPath,
+        firstAirDate,
         genreIds,
         id,
-        originalTitle,
+        name,
+        originCountry,
+        originalLanguage,
+        originalName,
         overview,
         popularity,
         posterPath,
-        releaseDate,
-        title,
-        video,
         voteAverage,
         voteCount,
       ];
