@@ -19,7 +19,7 @@ class TvModel extends Equatable {
   });
 
   final String? backdropPath;
-  final DateTime firstAirDate;
+  final DateTime? firstAirDate;
   final List<int> genreIds;
   final int id;
   final String name;
@@ -35,7 +35,10 @@ class TvModel extends Equatable {
   factory TvModel.fromJson(Map<String, dynamic> json) => TvModel(
         backdropPath:
             json["backdrop_path"] == null ? null : json["backdrop_path"],
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate:
+            json["first_air_date"] == null || json["first_air_date"] == ""
+                ? null
+                : DateTime.parse(json["first_air_date"]),
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         name: json["name"],
@@ -49,22 +52,22 @@ class TvModel extends Equatable {
         voteCount: json["vote_count"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "backdrop_path": backdropPath == null ? null : backdropPath,
-        "first_air_date":
-            "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
-        "id": id,
-        "name": name,
-        "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
-        "original_language": originalLanguage,
-        "original_name": originalName,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "backdrop_path": backdropPath == null ? null : backdropPath,
+  //       "first_air_date":
+  //           "${firstAirDate?.year.toString().padLeft(4, '0')}-${firstAirDate?.month.toString().padLeft(2, '0')}-${firstAirDate?.day.toString().padLeft(2, '0')}",
+  //       "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+  //       "id": id,
+  //       "name": name,
+  //       "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
+  //       "original_language": originalLanguage,
+  //       "original_name": originalName,
+  //       "overview": overview,
+  //       "popularity": popularity,
+  //       "poster_path": posterPath,
+  //       "vote_average": voteAverage,
+  //       "vote_count": voteCount,
+  //     };
 
   Tv toEntity() {
     return Tv(
