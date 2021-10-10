@@ -66,15 +66,15 @@ final testTvDetail = TvDetail(
   backdropPath: 'backdropPath',
   createdBy: ['a', 'b'],
   episodeRunTime: [1, 2],
-  firstAirDate: DateTime.now(),
+  firstAirDate: DateTime.parse("2012-02-27"),
   genres: [Genre(id: 1, name: 'Action')],
   homepage: 'homepage',
   id: 1,
   inProduction: true,
   languages: ['aa', 'bb'],
-  lastAirDate: DateTime.now(),
+  lastAirDate: DateTime.parse("2012-02-27"),
   lastEpisodeToAir: TvLastEpisodeToAir(
-      airDate: DateTime.now(),
+      airDate: DateTime.parse("2012-02-27"),
       episodeNumber: 1,
       id: 1,
       name: 'name',
@@ -101,7 +101,7 @@ final testTvDetail = TvDetail(
   ],
   seasons: [
     TvSeason(
-      airDate: DateTime.now(),
+      airDate: DateTime.parse("2012-02-27"),
       episodeCount: 1,
       id: 1,
       name: 'name',

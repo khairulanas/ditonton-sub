@@ -19,11 +19,11 @@ class TvSpokenLanguageModel extends Equatable {
         name: json["name"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "english_name": englishName,
-        "iso_639_1": iso6391,
-        "name": name,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "english_name": englishName,
+  //       "iso_639_1": iso6391,
+  //       "name": name,
+  //     };
   TvSpokenLanguage toEntity() => TvSpokenLanguage(
         englishName: this.englishName,
         iso6391: this.iso6391,
