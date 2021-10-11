@@ -54,7 +54,7 @@ void main() {
 
   group('now playing tvs', () {
     test('initialState should be Empty', () {
-      expect(provider.nowPlayingState, equals(RequestState.Empty));
+      expect(provider.airingTodayState, equals(RequestState.Empty));
     });
 
     test('should get data from the usecase', () async {
@@ -62,7 +62,7 @@ void main() {
       when(mockGetAiringTodayTvs.execute())
           .thenAnswer((_) async => Right(tTvList));
       // act
-      provider.fetchNowPlayingTvs();
+      provider.fetchAiringTodayTvs();
       // assert
       verify(mockGetAiringTodayTvs.execute());
     });
@@ -72,9 +72,9 @@ void main() {
       when(mockGetAiringTodayTvs.execute())
           .thenAnswer((_) async => Right(tTvList));
       // act
-      provider.fetchNowPlayingTvs();
+      provider.fetchAiringTodayTvs();
       // assert
-      expect(provider.nowPlayingState, RequestState.Loading);
+      expect(provider.airingTodayState, RequestState.Loading);
     });
 
     test('should change tvs when data is gotten successfully', () async {
@@ -82,10 +82,10 @@ void main() {
       when(mockGetAiringTodayTvs.execute())
           .thenAnswer((_) async => Right(tTvList));
       // act
-      await provider.fetchNowPlayingTvs();
+      await provider.fetchAiringTodayTvs();
       // assert
-      expect(provider.nowPlayingState, RequestState.Loaded);
-      expect(provider.nowPlayingTvs, tTvList);
+      expect(provider.airingTodayState, RequestState.Loaded);
+      expect(provider.airingTodayTvs, tTvList);
       expect(listenerCallCount, 2);
     });
 
@@ -94,9 +94,9 @@ void main() {
       when(mockGetAiringTodayTvs.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchNowPlayingTvs();
+      await provider.fetchAiringTodayTvs();
       // assert
-      expect(provider.nowPlayingState, RequestState.Error);
+      expect(provider.airingTodayState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

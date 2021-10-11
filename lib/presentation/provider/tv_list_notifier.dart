@@ -6,11 +6,11 @@ import 'package:ditonton/domain/usecases/get_top_rated_tvs.dart';
 import 'package:flutter/material.dart';
 
 class TvListNotifier extends ChangeNotifier {
-  var _nowPlayingTvs = <Tv>[];
-  List<Tv> get nowPlayingTvs => _nowPlayingTvs;
+  var _airingTodayTvs = <Tv>[];
+  List<Tv> get airingTodayTvs => _airingTodayTvs;
 
-  RequestState _nowPlayingState = RequestState.Empty;
-  RequestState get nowPlayingState => _nowPlayingState;
+  RequestState _airingTodayState = RequestState.Empty;
+  RequestState get airingTodayState => _airingTodayState;
 
   var _popularTvs = <Tv>[];
   List<Tv> get popularTvs => _popularTvs;
@@ -37,20 +37,20 @@ class TvListNotifier extends ChangeNotifier {
   final GetPopularTvs getPopularTvs;
   final GetTopRatedTvs getTopRatedTvs;
 
-  Future<void> fetchNowPlayingTvs() async {
-    _nowPlayingState = RequestState.Loading;
+  Future<void> fetchAiringTodayTvs() async {
+    _airingTodayState = RequestState.Loading;
     notifyListeners();
 
     final result = await getAiringTodayTvs.execute();
     result.fold(
       (failure) {
-        _nowPlayingState = RequestState.Error;
+        _airingTodayState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
       (tvsData) {
-        _nowPlayingState = RequestState.Loaded;
-        _nowPlayingTvs = tvsData;
+        _airingTodayState = RequestState.Loaded;
+        _airingTodayTvs = tvsData;
         notifyListeners();
       },
     );

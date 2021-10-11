@@ -1,7 +1,7 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
@@ -10,8 +10,14 @@ import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/popular_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/top_rated_tvs_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // movie
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
         ),
@@ -45,6 +52,26 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
+
+        // tv series
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSearchNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -54,11 +81,11 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
           colorScheme: kColorScheme.copyWith(secondary: kMikadoYellow),
         ),
-        home: HomeMoviePage(),
+        home: HomePage(),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
-              return MaterialPageRoute(builder: (_) => HomeMoviePage());
+              return MaterialPageRoute(builder: (_) => HomePage());
             case PopularMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:
