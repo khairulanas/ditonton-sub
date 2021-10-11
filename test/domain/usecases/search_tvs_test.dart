@@ -16,7 +16,7 @@ void main() {
   });
 
   final tTvs = <Tv>[];
-  final tQuery = 'Spiderman';
+  final tQuery = 'naruto';
 
   test('should get list of Tvs from the repository', () async {
     // arrange
