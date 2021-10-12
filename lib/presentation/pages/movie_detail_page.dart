@@ -107,6 +107,7 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             ElevatedButton(
+                              key: Key('watchListButton'),
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
                                   await Provider.of<MovieDetailNotifier>(
