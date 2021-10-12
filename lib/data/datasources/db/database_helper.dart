@@ -23,11 +23,11 @@ class DatabaseHelper {
   }
 
   static const String _tblWatchlist = 'watchlist';
-  static const String _tblWatchlistTv = 'watchlistTv';
+  static const String _tblWatchlistTv = 'watchlisttv';
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
-    final databasePath = '$path/ditonton.db';
+    final databasePath = '$path/ditonton2.db';
 
     var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;

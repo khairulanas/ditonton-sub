@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> _title = ['Movies', 'Tv Series'];
+  final List<String> _title = ['Movies', 'Tv Show'];
   int _index = 0;
   final List<Widget> _bodyScreen = [HomeMovieScreen(), HomeTvScreen()];
   void _onSelectedCategory(int index) {
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              title: Text(_title[0]),
               onTap: () {
                 _onSelectedCategory(0);
                 Navigator.pop(context);
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.movie),
-              title: Text('Tv Series'),
+              title: Text(_title[1]),
               onTap: () {
                 _onSelectedCategory(1);
                 Navigator.pop(context);

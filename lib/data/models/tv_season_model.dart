@@ -12,16 +12,17 @@ class TvSeasonModel extends Equatable {
     required this.seasonNumber,
   });
 
-  final DateTime airDate;
+  final DateTime? airDate;
   final int episodeCount;
   final int id;
   final String name;
   final String overview;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
 
   factory TvSeasonModel.fromJson(Map<String, dynamic> json) => TvSeasonModel(
-        airDate: DateTime.parse(json["air_date"]),
+        airDate:
+            json["air_date"] == null ? null : DateTime.parse(json["air_date"]),
         episodeCount: json["episode_count"],
         id: json["id"],
         name: json["name"],
