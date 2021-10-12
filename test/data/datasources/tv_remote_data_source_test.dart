@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
+import 'package:ditonton/data/models/tv_episodes_response.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -188,6 +189,43 @@ void main() {
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getTvRecommendations(tId);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get tv season episodes', () {
+    final tTvEpisodeList = TvEpisodesResponse.fromJson(
+            json.decode(readJson('dummy_data/tv_episode.json')))
+        .episodes;
+    final tIdTv = 1;
+    final tSeasonNumber = 1;
+
+    test('should return list of Tv episode Model when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tIdTv/season/$tSeasonNumber?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+                  readJson('dummy_data/tv_episode.json'), 200,
+                  headers: {
+                    HttpHeaders.contentTypeHeader:
+                        'application/json; charset=utf-8',
+                  }));
+      // act
+      final result = await dataSource.getTvSeasonEpisodes(tIdTv, tSeasonNumber);
+      // assert
+      expect(result, equals(tTvEpisodeList));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(
+              Uri.parse('$BASE_URL/tv/$tIdTv/season/$tSeasonNumber?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getTvSeasonEpisodes(tIdTv, tSeasonNumber);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });

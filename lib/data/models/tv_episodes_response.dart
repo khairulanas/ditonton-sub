@@ -6,14 +6,12 @@ class TvEpisodesResponse extends Equatable {
     required this.episodes,
   });
 
-  final List<TvEpisodeModel>? episodes;
+  final List<TvEpisodeModel> episodes;
 
   factory TvEpisodesResponse.fromJson(Map<String, dynamic> json) =>
       TvEpisodesResponse(
-        episodes: json["episodes"] == null
-            ? null
-            : List<TvEpisodeModel>.from(
-                json["episodes"].map((x) => TvEpisodeModel.fromJson(x))),
+        episodes: List<TvEpisodeModel>.from(
+            json["episodes"].map((x) => TvEpisodeModel.fromJson(x))),
       );
 
   @override
