@@ -22,7 +22,7 @@ class TvEpisodeModel extends Equatable {
   final String overview;
   final String productionCode;
   final int seasonNumber;
-  final String stillPath;
+  final String? stillPath;
   final double voteAverage;
   final int voteCount;
 

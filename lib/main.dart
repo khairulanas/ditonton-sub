@@ -6,6 +6,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_season_episodes_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -17,6 +18,7 @@ import 'package:ditonton/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_season_episodes_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,6 +75,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeasonEpisodesNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -107,6 +112,18 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvDetailPage(id: id),
+                settings: settings,
+              );
+            case TvSeasonEpisodesPage.ROUTE_NAME:
+              final arg = settings.arguments as Map<String, dynamic>;
+              final idTv = arg['idTv'];
+              final seasonNumber = arg['seasonNumber'];
+              final seasonName = arg['seasonName'];
+              return MaterialPageRoute(
+                builder: (_) => TvSeasonEpisodesPage(
+                    idTv: idTv,
+                    seasonNumber: seasonNumber,
+                    seasonName: seasonName),
                 settings: settings,
               );
 
