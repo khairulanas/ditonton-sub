@@ -1,79 +1,95 @@
 {
-  "backdrop_path": "/8IVuR1QQYVo9WTuTTE7KG2dVzPs.jpg",
-  "created_by": [],
-  "episode_run_time": [
-    32,
-    23,
-    30
-  ],
-  "first_air_date": "2021-09-03",
-  "genres": [
+  "backdrop_path": "/oaGvjB0DvdhXhOAuADfHb261ZHa.jpg",
+  "created_by": [
     {
-      "id": 99,
-      "name": "Documentary"
+      "id": 1294471,
+      "credit_id": "61235265886348007e36f84c",
+      "name": "Hwang Dong-hyuk",
+      "gender": 2,
+      "profile_path": "/xyr3b04ayyJtA5ZN3L0Af10WKIR.jpg"
     }
   ],
-  "homepage": "https://www.hulu.com/series/the-damelio-show-ad993806-7961-4eb3-9f92-e7b9a349ae22",
-  "id": 130392,
-  "in_production": true,
-  "languages": [
-    "en"
+  "episode_run_time": [
+    54
   ],
-  "last_air_date": "2021-09-03",
+  "first_air_date": "2021-09-17",
+  "genres": [
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.netflix.com/title/81040344",
+  "id": 93405,
+  "in_production": false,
+  "languages": [
+    "en",
+    "ko",
+    "ur"
+  ],
+  "last_air_date": "2021-09-17",
   "last_episode_to_air": {
-    "air_date": "2021-09-03",
-    "episode_number": 8,
-    "id": 3154389,
-    "name": "Here’s to 17!",
-    "overview": "It’s Charli’s 17th birthday, and her family plans a surprise. Dixie releases her new song after a pep talk from music legend LA Reid. At her birthday party, Charli reflects on the highs and lows of the past year.",
+    "air_date": "2021-09-17",
+    "episode_number": 9,
+    "id": 3222798,
+    "name": "One Lucky Day",
+    "overview": "The final round presents another cruel test — but this time, how it ends depends on just one player. The game's creator steps out of the shadows.",
     "production_code": "",
     "season_number": 1,
-    "still_path": "/uZgwKC56kMLfdRBw0h2YSbJI2qS.jpg",
-    "vote_average": 9.8,
-    "vote_count": 55
+    "still_path": "/sKeQbHeEUQLyoSdopa0QXm604cz.jpg",
+    "vote_average": 7.3,
+    "vote_count": 12
   },
-  "name": "The D'Amelio Show",
+  "name": "Squid Game",
   "next_episode_to_air": null,
   "networks": [
     {
-      "name": "Hulu",
-      "id": 453,
-      "logo_path": "/pqUTCleNUiTLAVlelGxUgWn1ELh.png",
-      "origin_country": "US"
+      "name": "Netflix",
+      "id": 213,
+      "logo_path": "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+      "origin_country": ""
     }
   ],
-  "number_of_episodes": 8,
+  "number_of_episodes": 9,
   "number_of_seasons": 1,
   "origin_country": [
-    "US"
+    "KR"
   ],
-  "original_language": "en",
-  "original_name": "The D'Amelio Show",
-  "overview": "From relative obscurity and a seemingly normal life, to overnight success and thrust into the Hollywood limelight overnight, the D’Amelios are faced with new challenges and opportunities they could not have imagined.",
-  "popularity": 30.513,
-  "poster_path": "/z0iCS5Znx7TeRwlYSd4c01Z0lFx.jpg",
+  "original_language": "ko",
+  "original_name": "오징어 게임",
+  "overview": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games—with high stakes. But, a tempting prize awaits the victor.",
+  "popularity": 10066.789,
+  "poster_path": "/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg",
   "production_companies": [
     {
-      "id": 83966,
-      "logo_path": "/q2BuooxLm16EvWcUY4CMJo3PSNo.png",
-      "name": "The Intellectual Property Corporation",
-      "origin_country": "US"
+      "id": 112647,
+      "logo_path": null,
+      "name": "Siren Pictures",
+      "origin_country": "KR"
     }
   ],
   "production_countries": [
     {
-      "iso_3166_1": "US",
-      "name": "United States of America"
+      "iso_3166_1": "KR",
+      "name": "South Korea"
     }
   ],
   "seasons": [
     {
-      "air_date": "2021-09-03",
-      "episode_count": 8,
-      "id": 204453,
+      "air_date": "2021-09-17",
+      "episode_count": 9,
+      "id": 131977,
       "name": "Season 1",
-      "overview": "",
-      "poster_path": "/z0iCS5Znx7TeRwlYSd4c01Z0lFx.jpg",
+      "overview": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
+      "poster_path": "/lDm3AjG0ZsPRAz1qHD0em8pzTTp.jpg",
       "season_number": 1
     }
   ],
@@ -82,11 +98,21 @@
       "english_name": "English",
       "iso_639_1": "en",
       "name": "English"
+    },
+    {
+      "english_name": "Korean",
+      "iso_639_1": "ko",
+      "name": "한국어/조선말"
+    },
+    {
+      "english_name": "Urdu",
+      "iso_639_1": "ur",
+      "name": "اردو"
     }
   ],
-  "status": "Returning Series",
-  "tagline": "Followers come and go but family is forever.",
-  "type": "Documentary",
-  "vote_average": 9.5,
-  "vote_count": 2446
+  "status": "Ended",
+  "tagline": "45.6 billion won is child's play.",
+  "type": "Scripted",
+  "vote_average": 7.9,
+  "vote_count": 7006
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/tv_created_by_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_last_episode_to_air_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
@@ -13,6 +14,7 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_created_by.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -195,7 +197,14 @@ void main() {
     final tId = 1;
     final tTvResponse = TvDetailModel(
       backdropPath: 'backdropPath',
-      createdBy: ['a', 'b'],
+      createdBy: [
+        CreatedByModel(
+            id: 1,
+            creditId: 'creditId',
+            name: 'name',
+            gender: 1,
+            profilePath: 'profilePath')
+      ],
       episodeRunTime: [1, 2],
       firstAirDate: DateTime.parse("2012-02-27"),
       genres: [GenreModel(id: 1, name: 'Action')],

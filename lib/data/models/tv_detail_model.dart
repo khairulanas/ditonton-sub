@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/tv_created_by_model.dart';
 import 'package:ditonton/data/models/tv_last_episode_to_air_model.dart';
 import 'package:ditonton/data/models/tv_network_model.dart';
 import 'package:ditonton/data/models/tv_production_country_model.dart';
@@ -43,7 +44,7 @@ class TvDetailModel extends Equatable {
   });
 
   final String backdropPath;
-  final List<dynamic> createdBy;
+  final List<CreatedByModel>? createdBy;
   final List<int> episodeRunTime;
   final DateTime firstAirDate;
   final List<GenreModel> genres;
@@ -76,7 +77,10 @@ class TvDetailModel extends Equatable {
 
   factory TvDetailModel.fromJson(Map<String, dynamic> json) => TvDetailModel(
         backdropPath: json["backdrop_path"],
-        createdBy: List<dynamic>.from(json["created_by"].map((x) => x)),
+        createdBy: json["created_by"] == null
+            ? null
+            : List<CreatedByModel>.from(
+                json["created_by"].map((x) => CreatedByModel.fromJson(x))),
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: DateTime.parse(json["first_air_date"]),
         genres: List<GenreModel>.from(
@@ -120,7 +124,7 @@ class TvDetailModel extends Equatable {
 
   TvDetail toEntity() => TvDetail(
       backdropPath: this.backdropPath,
-      createdBy: this.createdBy,
+      createdBy: this.createdBy?.map((creator) => creator.toEntity()).toList(),
       episodeRunTime: this.episodeRunTime,
       firstAirDate: this.firstAirDate,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),

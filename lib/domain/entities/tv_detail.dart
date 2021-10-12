@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/tv_created_by.dart';
 import 'package:ditonton/domain/entities/tv_last_episode_to_air.dart';
 import 'package:ditonton/domain/entities/tv_network.dart';
 import 'package:ditonton/domain/entities/tv_production_country.dart';
@@ -42,7 +43,7 @@ class TvDetail extends Equatable {
   });
 
   final String backdropPath;
-  final List<dynamic> createdBy;
+  final List<CreatedBy>? createdBy;
   final List<int> episodeRunTime;
   final DateTime firstAirDate;
   final List<Genre> genres;

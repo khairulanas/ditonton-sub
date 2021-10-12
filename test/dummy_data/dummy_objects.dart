@@ -4,6 +4,7 @@ import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_created_by.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/entities/tv_last_episode_to_air.dart';
 import 'package:ditonton/domain/entities/tv_network.dart';
@@ -64,7 +65,14 @@ final testMovieDetail = MovieDetail(
 
 final testTvDetail = TvDetail(
   backdropPath: 'backdropPath',
-  createdBy: ['a', 'b'],
+  createdBy: [
+    CreatedBy(
+        id: 1,
+        creditId: 'creditId',
+        name: 'name',
+        gender: 1,
+        profilePath: 'profilePath')
+  ],
   episodeRunTime: [1, 2],
   firstAirDate: DateTime.parse("2012-02-27"),
   genres: [Genre(id: 1, name: 'Action')],

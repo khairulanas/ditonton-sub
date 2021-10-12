@@ -9,10 +9,10 @@ class TvNetworkModel extends Equatable {
     required this.originCountry,
   });
 
-  final String name;
-  final int id;
-  final String logoPath;
-  final String originCountry;
+  final String? name;
+  final int? id;
+  final String? logoPath;
+  final String? originCountry;
 
   factory TvNetworkModel.fromJson(Map<String, dynamic> json) => TvNetworkModel(
         name: json["name"],
