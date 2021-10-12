@@ -46,7 +46,7 @@ class TvDetailModel extends Equatable {
   final String backdropPath;
   final List<CreatedByModel>? createdBy;
   final List<int> episodeRunTime;
-  final DateTime firstAirDate;
+  final DateTime? firstAirDate;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
@@ -82,7 +82,9 @@ class TvDetailModel extends Equatable {
             : List<CreatedByModel>.from(
                 json["created_by"].map((x) => CreatedByModel.fromJson(x))),
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate: json["first_air_date"] == null
+            ? null
+            : DateTime.tryParse(json["first_air_date"]),
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
