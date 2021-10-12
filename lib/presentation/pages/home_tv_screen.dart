@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -39,9 +40,11 @@ class _HomeTvScreenState extends State<HomeTvScreen> {
                 return Text('Failed');
               }
             }),
-            _buildSubHeading(title: 'Popular', onTap: () => null
-                // Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
-                ),
+            _buildSubHeading(
+              title: 'Popular',
+              onTap: () =>
+                  Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
+            ),
             Consumer<TvListNotifier>(builder: (context, data, child) {
               final state = data.popularTvsState;
               if (state == RequestState.Loading) {

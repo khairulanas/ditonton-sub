@@ -3,6 +3,7 @@ import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
@@ -126,6 +127,8 @@ class MyApp extends StatelessWidget {
                     seasonName: seasonName),
                 settings: settings,
               );
+            case PopularTvsPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => PopularTvsPage());
 
             // etc
             case AboutPage.ROUTE_NAME:
