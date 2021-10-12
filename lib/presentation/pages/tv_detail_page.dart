@@ -181,6 +181,82 @@ class DetailContent extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             Text(
+                              'Seasons (${tv.seasons.length})',
+                              style: kHeading6,
+                            ),
+                            Container(
+                              height: 150,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final season = tv.seasons[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        // Navigator.pushReplacementNamed(
+                                        //   context,
+                                        //   TvDetailPage.ROUTE_NAME,
+                                        //   arguments: tv.id,
+                                        // );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl: season.posterPath ==
+                                                      null
+                                                  ? 'https://www.pariyes.net/wp-content/uploads/2021/06/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg'
+                                                  : 'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                              placeholder: (context, url) =>
+                                                  Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Icon(Icons.error),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            SizedBox(
+                                                width: 150,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(season.name,
+                                                        style:
+                                                            kHeading6.copyWith(
+                                                                fontSize: 15)),
+                                                    Text(
+                                                        '${season.episodeCount} Episode',
+                                                        style:
+                                                            kHeading6.copyWith(
+                                                                fontSize: 15)),
+                                                    Text(
+                                                      season.overview,
+                                                      maxLines: 3,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    )
+                                                  ],
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                itemCount: tv.seasons.length,
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
