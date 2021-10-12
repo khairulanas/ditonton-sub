@@ -1,0 +1,65 @@
+{
+  "_id": "60257f9f6af8f8003e2e16cc",
+  "air_date": "2021-02-12",
+  "episodes": [
+    {
+      "air_date": "2021-02-12",
+      "episode_number": 1,
+      "crew": [
+        {
+          "job": "Director",
+          "department": "Directing",
+          "credit_id": "608be0ee7b7b4d003f88cead",
+          "adult": false,
+          "gender": 2,
+          "id": 931450,
+          "known_for_department": "Directing",
+          "name": "Mamoru Kanbe",
+          "original_name": "Mamoru Kanbe",
+          "popularity": 0.982,
+          "profile_path": null
+        },
+        {
+          "job": "Writer",
+          "department": "Writing",
+          "credit_id": "608be19aac41610029b6a0f1",
+          "adult": false,
+          "gender": 2,
+          "id": 1015969,
+          "known_for_department": "Writing",
+          "name": "Toshiya Ohno",
+          "original_name": "Toshiya Ohno",
+          "popularity": 1.614,
+          "profile_path": null
+        },
+        {
+          "job": "Writer",
+          "department": "Writing",
+          "credit_id": "608be215f8aee80040b5ce1e",
+          "adult": false,
+          "gender": 0,
+          "id": 2237132,
+          "known_for_department": "Creator",
+          "name": "Kaiu Shirai",
+          "original_name": "Kaiu Shirai",
+          "popularity": 0.6,
+          "profile_path": null
+        }
+      ],
+      "guest_stars": [],
+      "id": 2723622,
+      "name": "Episode 5.5: Guidepost",
+      "overview": "A special episode detailing the events leading up to the current situation with the Grace Field Farm children.",
+      "production_code": "",
+      "season_number": 0,
+      "still_path": "/aHqMdHgzOTGLFYCZxXrUyywq67l.jpg",
+      "vote_average": 0.0,
+      "vote_count": 0
+    }
+  ],
+  "name": "Specials",
+  "overview": "",
+  "id": 180946,
+  "poster_path": "/zKBqxjS1Ym9q2ndhdvRpYpaNcNK.jpg",
+  "season_number": 0
+}
