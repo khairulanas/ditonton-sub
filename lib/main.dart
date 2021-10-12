@@ -1,14 +1,17 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/airing_today_tvs_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_season_episodes_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/provider/airing_today_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -74,6 +77,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularTvsNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<AiringTodayTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -129,6 +135,10 @@ class MyApp extends StatelessWidget {
               );
             case PopularTvsPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => PopularTvsPage());
+            case TopRatedTvsPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => TopRatedTvsPage());
+            case AiringTodayTvsPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => AiringTodayTvsPage());
 
             // etc
             case AboutPage.ROUTE_NAME:

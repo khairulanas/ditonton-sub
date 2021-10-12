@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/presentation/pages/airing_today_tvs_page.dart';
 import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -24,9 +26,10 @@ class _HomeTvScreenState extends State<HomeTvScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Airing Today',
-              style: kHeading6,
+            _buildSubHeading(
+              title: 'Airing Today',
+              onTap: () =>
+                  Navigator.pushNamed(context, AiringTodayTvsPage.ROUTE_NAME),
             ),
             Consumer<TvListNotifier>(builder: (context, data, child) {
               final state = data.airingTodayState;
@@ -57,9 +60,11 @@ class _HomeTvScreenState extends State<HomeTvScreen> {
                 return Text('Failed');
               }
             }),
-            _buildSubHeading(title: 'Top Rated', onTap: () => null
-                // Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
-                ),
+            _buildSubHeading(
+              title: 'Top Rated',
+              onTap: () =>
+                  Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
+            ),
             Consumer<TvListNotifier>(builder: (context, data, child) {
               final state = data.topRatedTvsState;
               if (state == RequestState.Loading) {
