@@ -15,8 +15,11 @@ jobs:
 
       - name: Install Dependencies
         run: flutter packages get
+      - name: Move to about folder
         run: cd about
+      - name: install dependencies
         run: flutter packages get
+      - name: Back to root folder
         run: cd ..
 
       - name: Format
