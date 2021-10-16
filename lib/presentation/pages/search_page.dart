@@ -51,7 +51,7 @@ class SearchPage extends StatelessWidget {
                   text: _title[1],
                 ),
               ]),
-              Expanded(
+              Flexible(
                 child: TabBarView(
                   children: [
                     _MovieSearchResult(),
@@ -82,20 +82,16 @@ class _MovieSearchResult extends StatelessWidget {
           );
         } else if (data.state == RequestState.Loaded) {
           final result = data.searchResult;
-          return Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemBuilder: (context, index) {
-                final movie = data.searchResult[index];
-                return MovieCard(movie);
-              },
-              itemCount: result.length,
-            ),
+          return ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemBuilder: (context, index) {
+              final movie = data.searchResult[index];
+              return MovieCard(movie);
+            },
+            itemCount: result.length,
           );
         } else {
-          return Expanded(
-            child: Container(),
-          );
+          return Container();
         }
       },
     );
@@ -117,20 +113,16 @@ class _TvSearchResult extends StatelessWidget {
           );
         } else if (data.state == RequestState.Loaded) {
           final result = data.searchResult;
-          return Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemBuilder: (context, index) {
-                final tv = data.searchResult[index];
-                return TvCard(tv);
-              },
-              itemCount: result.length,
-            ),
+          return ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemBuilder: (context, index) {
+              final tv = data.searchResult[index];
+              return TvCard(tv);
+            },
+            itemCount: result.length,
           );
         } else {
-          return Expanded(
-            child: Container(),
-          );
+          return Container();
         }
       },
     );
