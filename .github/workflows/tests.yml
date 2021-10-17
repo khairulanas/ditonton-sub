@@ -13,14 +13,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1.5.3
 
+      - name: Move to core folder
+        run: cd core
+      
       - name: Install Dependencies
         run: flutter packages get
-      # - name: Move to about folder
-      #   run: cd about
-      # - name: install dependencies
-      #   run: flutter packages get
-      # - name: Back to root folder
-      #   run: cd ..
 
       - name: Format
         run: flutter format --set-exit-if-changed .

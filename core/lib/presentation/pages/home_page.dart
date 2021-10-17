@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../utils/routes.dart';
+import '../provider/movie_list_notifier.dart';
+import '../provider/tv_list_notifier.dart';
 import 'home_movie_screen.dart';
 import 'home_tv_screen.dart';
 import 'search_page.dart';
 import 'watchlist_movies_page.dart';
-import '../provider/movie_list_notifier.dart';
-import '../provider/tv_list_notifier.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:about/about_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, ABOUT_ROUTE);
               },
               leading: Icon(Icons.info_outline),
               title: Text('About'),

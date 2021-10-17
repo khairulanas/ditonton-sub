@@ -21,8 +21,6 @@ dependencies:
   get_it: ^7.2.0
   sqflite: ^2.0.0+4
   path_provider: ^2.0.5
-  about:
-    path: ../about
 
 dev_dependencies:
   mockito: ^5.0.16
