@@ -4,12 +4,12 @@ on:
   push:
     paths: 
       - "core/**"
-      - ".github/worlflows/core_test.yaml"
+      - ".github/workflows/core_test.yaml"
 
   pull_request:
     paths: 
       - "core/**"
-      - ".github/worlflows/core_test.yaml"
+      - ".github/workflows/core_test.yaml"
 
 jobs:
   tests:
