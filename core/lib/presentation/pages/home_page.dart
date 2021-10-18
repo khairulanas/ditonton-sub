@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie/presentation/provider/movie_list_notifier.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/routes.dart';
-import '../provider/movie_list_notifier.dart';
 import '../provider/tv_list_notifier.dart';
-import 'home_movie_screen.dart';
+import 'package:movie/presentation/pages/home_movie_screen.dart';
 import 'home_tv_screen.dart';
 import 'watchlist_movies_page.dart';
 

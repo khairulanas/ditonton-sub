@@ -38,15 +38,17 @@ dependencies:
   get_it: ^7.2.0
   sqflite: ^2.0.0+4
   path_provider: ^2.0.5
+  flutter_bloc: ^7.3.1
+  firebase_core: ^1.7.0
+  firebase_crashlytics: ^2.2.3
   about:
     path: about
   core:
     path: core
   search:
     path: search
-  flutter_bloc: ^7.3.1
-  firebase_core: ^1.7.0
-  firebase_crashlytics: ^2.2.3
+  movie:
+    path: movie
 
 dev_dependencies:
   mockito: ^5.0.16

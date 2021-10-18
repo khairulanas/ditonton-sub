@@ -1,6 +1,6 @@
-name: core
+name: movie
 description: A new Flutter package project.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 version: 0.0.1
 homepage:
 
@@ -11,19 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.4
   provider: ^6.0.1
   dartz: ^0.10.0-nullsafety.2
   equatable: ^2.0.3
-  google_fonts: ^2.1.0
   flutter_rating_bar: ^4.0.0
   cached_network_image: ^3.1.0
   get_it: ^7.2.0
-  sqflite: ^2.0.0+4
-  path_provider: ^2.0.5
-  firebase_crashlytics: ^2.2.3
-  movie:
-    path: ../movie
+  core:
+    path: ../core
 
 dev_dependencies:
   mockito: ^5.0.16
