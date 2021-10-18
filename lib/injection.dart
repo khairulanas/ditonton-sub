@@ -31,14 +31,13 @@ import 'package:search/domain/usecases/search_tvs.dart';
 import 'package:core/presentation/provider/airing_today_tvs_notifier.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie_list_notifier.dart';
-import 'package:search/presentation/provider/movie_search_notifier.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:core/presentation/provider/popular_movies_notifier.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
 import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
-import 'package:search/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/provider/tv_season_episodes_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
@@ -48,6 +47,18 @@ import 'package:get_it/get_it.dart';
 final locator = GetIt.instance;
 
 void init() {
+  // bloc
+  locator.registerFactory(
+    () => MovieSearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TvSearchBloc(
+      locator(),
+    ),
+  );
+
   // Movie provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -65,11 +76,7 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
+
   locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
@@ -102,11 +109,7 @@ void init() {
       removeWatchlistTv: locator(),
     ),
   );
-  locator.registerFactory(
-    () => TvSearchNotifier(
-      searchTvs: locator(),
-    ),
-  );
+
   locator.registerFactory(
     () => PopularTvsNotifier(
       locator(),
