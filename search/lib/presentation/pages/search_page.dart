@@ -1,12 +1,10 @@
-import '../../utils/state_enum.dart';
-import '../provider/movie_search_notifier.dart';
-import '../provider/tv_search_notifier.dart';
-import '../widgets/movie_card_list.dart';
-import '../widgets/tv_card_list.dart';
+import 'package:core/core.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../core.dart';
+import 'package:search/presentation/provider/movie_search_notifier.dart';
+import 'package:search/presentation/provider/tv_search_notifier.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
@@ -109,7 +107,7 @@ class _TvSearchResult extends StatelessWidget {
     return Consumer<TvSearchNotifier>(
       builder: (context, data, child) {
         if (data.state == RequestState.Loading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (data.state == RequestState.Loaded) {

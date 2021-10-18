@@ -42,6 +42,8 @@ dependencies:
     path: about
   core:
     path: core
+  search:
+    path: search
 
 dev_dependencies:
   mockito: ^5.0.16

@@ -6,7 +6,6 @@ import '../provider/movie_list_notifier.dart';
 import '../provider/tv_list_notifier.dart';
 import 'home_movie_screen.dart';
 import 'home_tv_screen.dart';
-import 'search_page.dart';
 import 'watchlist_movies_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SEARCH_ROUTE);
             },
             icon: Icon(Icons.search),
           )

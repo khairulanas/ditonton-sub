@@ -1,5 +1,6 @@
-import '../../utils/state_enum.dart';
-import '../../domain/entities/tv.dart';
+import 'package:core/core.dart';
+import 'package:core/domain/entities/tv.dart';
+
 import '../../domain/usecases/search_tvs.dart';
 import 'package:flutter/foundation.dart';
 
