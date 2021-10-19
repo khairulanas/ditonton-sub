@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/movie_detail.dart';
@@ -61,79 +62,178 @@ void main() {
   final tMovies = <Movie>[testMovie];
   int tId = 1;
   final movieDetailState = MovieDetailState.initial();
+  group('fetchMovieDetail event', () {
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      'shoud emit [movieloading, movieloaded+recomendationLoading, recomendation loaded] when all success',
+      build: () {
+        when(mockGetMovieDetail.execute(tId))
+            .thenAnswer((_) async => Right(tMovieDetail));
+        when(mockGetMovieRecommendations.execute(tId))
+            .thenAnswer((_) async => Right(tMovies));
+        return movieDetailBloc;
+      },
+      act: (bloc) => bloc.add(MovieDetailEvent.fetchMovieDetail(tId)),
+      expect: () => [
+        movieDetailState.copyWith(movieState: RequestState.Loading),
+        movieDetailState.copyWith(
+          movieState: RequestState.Loaded,
+          movie: tMovieDetail,
+          message: '',
+          recommendationState: RequestState.Loading,
+        ),
+        movieDetailState.copyWith(
+          movieState: RequestState.Loaded,
+          movie: tMovieDetail,
+          message: '',
+          recommendationState: RequestState.Loaded,
+          movieRecommendations: tMovies,
+        ),
+      ],
+      verify: (_) {
+        verify(mockGetMovieDetail.execute(tId));
+        verify(mockGetMovieRecommendations.execute(tId));
+      },
+    );
 
-  blocTest<MovieDetailBloc, MovieDetailState>(
-    'fetchMovieDetail: shoud emit [movieloading, movieloaded+recomendationLoading, recomendation loaded]',
-    build: () {
-      when(mockGetMovieDetail.execute(tId))
-          .thenAnswer((_) async => Right(tMovieDetail));
-      when(mockGetMovieRecommendations.execute(tId))
-          .thenAnswer((_) async => Right(tMovies));
-      return movieDetailBloc;
-    },
-    act: (bloc) => bloc.add(MovieDetailEvent.fetchMovieDetail(tId)),
-    expect: () => [
-      movieDetailState.copyWith(movieState: RequestState.Loading),
-      movieDetailState.copyWith(
-        movieState: RequestState.Loaded,
-        movie: tMovieDetail,
-        message: '',
-        recommendationState: RequestState.Loading,
-      ),
-      movieDetailState.copyWith(
-        movieState: RequestState.Loaded,
-        movie: tMovieDetail,
-        message: '',
-        recommendationState: RequestState.Loaded,
-        movieRecommendations: tMovies,
-      ),
-    ],
-    verify: (_) {
-      verify(mockGetMovieDetail.execute(tId));
-      verify(mockGetMovieRecommendations.execute(tId));
-    },
-  );
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      'shoud emit [movieState:error+message:failure] when GetMovieDetail fail',
+      build: () {
+        when(mockGetMovieDetail.execute(tId))
+            .thenAnswer((_) async => Left(ConnectionFailure('fail')));
+        when(mockGetMovieRecommendations.execute(tId))
+            .thenAnswer((_) async => Right(tMovies));
+        return movieDetailBloc;
+      },
+      act: (bloc) => bloc.add(MovieDetailEvent.fetchMovieDetail(tId)),
+      expect: () => [
+        movieDetailState.copyWith(movieState: RequestState.Loading),
+        movieDetailState.copyWith(
+            movieState: RequestState.Error, message: 'fail'),
+      ],
+      verify: (_) {
+        verify(mockGetMovieDetail.execute(tId));
+        verify(mockGetMovieRecommendations.execute(tId));
+      },
+    );
 
-  blocTest<MovieDetailBloc, MovieDetailState>(
-    'addWatchlist event: shoud emit [watchlistMessage,isAddedToWatchlist:true]',
-    build: () {
-      when(mockSaveWatchlist.execute(tMovieDetail))
-          .thenAnswer((_) async => Right('Added to Watchlist'));
-      when(mockGetWatchListStatus.execute(tMovieDetail.id))
-          .thenAnswer((_) async => true);
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      'shoud emit [movieloading, movieloaded+recomendationLoading, recomendation error+message] when GetMovieRecommendations fail',
+      build: () {
+        when(mockGetMovieDetail.execute(tId))
+            .thenAnswer((_) async => Right(tMovieDetail));
+        when(mockGetMovieRecommendations.execute(tId))
+            .thenAnswer((_) async => Left(ConnectionFailure('fail')));
+        return movieDetailBloc;
+      },
+      act: (bloc) => bloc.add(MovieDetailEvent.fetchMovieDetail(tId)),
+      expect: () => [
+        movieDetailState.copyWith(movieState: RequestState.Loading),
+        movieDetailState.copyWith(
+          movieState: RequestState.Loaded,
+          movie: tMovieDetail,
+          message: '',
+          recommendationState: RequestState.Loading,
+        ),
+        movieDetailState.copyWith(
+          movieState: RequestState.Loaded,
+          movie: tMovieDetail,
+          message: 'fail',
+          recommendationState: RequestState.Error,
+        ),
+      ],
+      verify: (_) {
+        verify(mockGetMovieDetail.execute(tId));
+        verify(mockGetMovieRecommendations.execute(tId));
+      },
+    );
+  });
 
-      return movieDetailBloc;
-    },
-    act: (bloc) => bloc.add(MovieDetailEvent.addWatchlist(tMovieDetail)),
-    expect: () => [
-      movieDetailState.copyWith(watchlistMessage: 'Added to Watchlist'),
-      movieDetailState.copyWith(
-          watchlistMessage: 'Added to Watchlist', isAddedToWatchlist: true),
-    ],
-    verify: (_) {
-      verify(mockSaveWatchlist.execute(tMovieDetail));
-      verify(mockGetWatchListStatus.execute(tMovieDetail.id));
-    },
-  );
-  blocTest<MovieDetailBloc, MovieDetailState>(
-    'removeFromWatchlist event: shoud emit [watchlistMessage, isAddedToWatchlist:false]',
-    build: () {
-      when(mockRemoveWatchlist.execute(tMovieDetail))
-          .thenAnswer((_) async => Right('Removed from Watchlist'));
-      when(mockGetWatchListStatus.execute(tMovieDetail.id))
-          .thenAnswer((_) async => false);
+  group('addWatchlist event', () {
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      'shoud emit [watchlistMessage,isAddedToWatchlist:true] when success',
+      build: () {
+        when(mockSaveWatchlist.execute(tMovieDetail))
+            .thenAnswer((_) async => Right('Added to Watchlist'));
+        when(mockGetWatchListStatus.execute(tMovieDetail.id))
+            .thenAnswer((_) async => true);
 
-      return movieDetailBloc;
-    },
-    act: (bloc) => bloc.add(MovieDetailEvent.removeFromWatchlist(tMovieDetail)),
-    expect: () => [
-      movieDetailState.copyWith(watchlistMessage: 'Removed from Watchlist'),
-    ],
-    verify: (_) {
-      verify(mockRemoveWatchlist.execute(tMovieDetail));
-      verify(mockGetWatchListStatus.execute(tMovieDetail.id));
-    },
-  );
+        return movieDetailBloc;
+      },
+      act: (bloc) => bloc.add(MovieDetailEvent.addWatchlist(tMovieDetail)),
+      expect: () => [
+        movieDetailState.copyWith(watchlistMessage: 'Added to Watchlist'),
+        movieDetailState.copyWith(
+            watchlistMessage: 'Added to Watchlist', isAddedToWatchlist: true),
+      ],
+      verify: (_) {
+        verify(mockSaveWatchlist.execute(tMovieDetail));
+        verify(mockGetWatchListStatus.execute(tMovieDetail.id));
+      },
+    );
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      'shoud emit [watchlistMessage] when fail',
+      build: () {
+        when(mockSaveWatchlist.execute(tMovieDetail))
+            .thenAnswer((_) async => Left(DatabaseFailure('fail')));
+        when(mockGetWatchListStatus.execute(tMovieDetail.id))
+            .thenAnswer((_) async => false);
+
+        return movieDetailBloc;
+      },
+      act: (bloc) => bloc.add(MovieDetailEvent.addWatchlist(tMovieDetail)),
+      expect: () => [
+        movieDetailState.copyWith(watchlistMessage: 'fail'),
+      ],
+      verify: (_) {
+        verify(mockSaveWatchlist.execute(tMovieDetail));
+        verify(mockGetWatchListStatus.execute(tMovieDetail.id));
+      },
+    );
+  });
+
+  group('removeFromWatchlist event', () {
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      ': shoud emit [watchlistMessage, isAddedToWatchlist:false] when success',
+      build: () {
+        when(mockRemoveWatchlist.execute(tMovieDetail))
+            .thenAnswer((_) async => Right('Removed from Watchlist'));
+        when(mockGetWatchListStatus.execute(tMovieDetail.id))
+            .thenAnswer((_) async => false);
+
+        return movieDetailBloc;
+      },
+      act: (bloc) =>
+          bloc.add(MovieDetailEvent.removeFromWatchlist(tMovieDetail)),
+      expect: () => [
+        movieDetailState.copyWith(watchlistMessage: 'Removed from Watchlist'),
+      ],
+      verify: (_) {
+        verify(mockRemoveWatchlist.execute(tMovieDetail));
+        verify(mockGetWatchListStatus.execute(tMovieDetail.id));
+      },
+    );
+    blocTest<MovieDetailBloc, MovieDetailState>(
+      ': shoud emit [watchlistMessage] when fail',
+      build: () {
+        when(mockRemoveWatchlist.execute(tMovieDetail))
+            .thenAnswer((_) async => Left(DatabaseFailure('fail')));
+        when(mockGetWatchListStatus.execute(tMovieDetail.id))
+            .thenAnswer((_) async => false);
+
+        return movieDetailBloc;
+      },
+      act: (bloc) =>
+          bloc.add(MovieDetailEvent.removeFromWatchlist(tMovieDetail)),
+      expect: () => [
+        movieDetailState.copyWith(watchlistMessage: 'fail'),
+      ],
+      verify: (_) {
+        verify(mockRemoveWatchlist.execute(tMovieDetail));
+        verify(mockGetWatchListStatus.execute(tMovieDetail.id));
+      },
+    );
+  });
+
   blocTest<MovieDetailBloc, MovieDetailState>(
     'loadWatchlistStatus event: shoud emit [isAddedToWatchlist:true]',
     build: () {
