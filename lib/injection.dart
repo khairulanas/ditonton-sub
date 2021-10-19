@@ -30,6 +30,7 @@ import 'package:search/domain/usecases/search_movies.dart';
 import 'package:search/domain/usecases/search_tvs.dart';
 import 'package:core/presentation/provider/airing_today_tvs_notifier.dart';
 import 'package:movie/presentation/provider/movie_detail_notifier.dart';
+import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:movie/presentation/provider/movie_list_notifier.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:movie/presentation/provider/popular_movies_notifier.dart';
@@ -57,6 +58,14 @@ void init() {
     () => TvSearchBloc(
       locator(),
     ),
+  );
+  locator.registerFactory(
+    () => MovieDetailBloc(
+        getMovieDetail: locator(),
+        getMovieRecommendations: locator(),
+        getWatchListStatus: locator(),
+        saveWatchlist: locator(),
+        removeWatchlist: locator()),
   );
 
   // Movie provider

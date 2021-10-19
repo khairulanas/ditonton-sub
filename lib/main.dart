@@ -1,5 +1,6 @@
 import 'package:core/presentation/pages/airing_today_tvs_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
+import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:core/presentation/pages/popular_tvs_page.dart';
@@ -13,7 +14,6 @@ import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/tv_season_episodes_page.dart';
 import 'package:core/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/presentation/provider/airing_today_tvs_notifier.dart';
-import 'package:movie/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie/presentation/provider/movie_list_notifier.dart';
 import 'package:movie/presentation/provider/popular_movies_notifier.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
@@ -47,8 +47,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<MovieDetailNotifier>(),
+        // ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
         // ChangeNotifierProvider(
         //   create: (_) => di.locator<MovieSearchNotifier>(),

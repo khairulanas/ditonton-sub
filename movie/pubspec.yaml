@@ -19,6 +19,9 @@ dependencies:
   get_it: ^7.2.0
   core:
     path: ../core
+  flutter_bloc: ^7.3.1
+  freezed: ^0.15.0+1
+  freezed_annotation: ^0.15.0
 
 dev_dependencies:
   mockito: ^5.0.16
@@ -28,6 +31,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  bloc_test: ^8.3.0
+  mocktail: ^0.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

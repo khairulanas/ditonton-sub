@@ -1,4 +1,4 @@
-name: Search_Module_Tests
+name: Movie_Module_Tests
 
 on:
   push:
