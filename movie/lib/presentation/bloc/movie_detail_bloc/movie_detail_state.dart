@@ -15,7 +15,7 @@ part of 'movie_detail_bloc.dart';
 //   List<Object?> get props => [];
 // }
 @freezed
-abstract class MovieDetailState with _$MovieDetailState {
+class MovieDetailState with _$MovieDetailState {
   const factory MovieDetailState(
       {required MovieDetail? movie,
       required RequestState movieState,

@@ -39,7 +39,7 @@ part of 'movie_detail_bloc.dart';
 // }
 
 @freezed
-abstract class MovieDetailEvent with _$MovieDetailEvent {
+class MovieDetailEvent with _$MovieDetailEvent {
   const factory MovieDetailEvent.fetchMovieDetail(int id) = FetchMovieDetail;
   const factory MovieDetailEvent.addWatchlist(MovieDetail movie) = AddWatchlist;
   const factory MovieDetailEvent.removeFromWatchlist(MovieDetail movie) =
