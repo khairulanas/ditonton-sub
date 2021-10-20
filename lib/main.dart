@@ -1,6 +1,7 @@
 import 'package:core/presentation/pages/airing_today_tvs_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
+import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:core/presentation/pages/popular_tvs_page.dart';
@@ -17,7 +18,6 @@ import 'package:core/presentation/provider/airing_today_tvs_notifier.dart';
 import 'package:movie/presentation/provider/movie_list_notifier.dart';
 import 'package:movie/presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import 'package:core/presentation/provider/popular_tvs_notifier.dart';
-import 'package:movie/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
@@ -62,8 +62,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<TvSearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        // ChangeNotifierProvider(
+        //   create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        // ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>(),
         ),
         // ChangeNotifierProvider(
         //   create: (_) => di.locator<PopularMoviesNotifier>(),
