@@ -50,6 +50,21 @@ void main() {
     expect(progressBarFinder, findsWidgets);
   });
 
+  testWidgets('should display loading when recommendationState loading',
+      (WidgetTester tester) async {
+    when(() => mockBloc.state).thenReturn(MovieDetailState.initial().copyWith(
+      movieState: RequestState.Loaded,
+      movie: testMovieDetail,
+      recommendationState: RequestState.Loading,
+      isAddedToWatchlist: false,
+    ));
+
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+
+    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(progressBarFinder, findsWidgets);
+  });
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
@@ -123,42 +138,87 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
     expect(find.text('Added to Watchlist'), findsOneWidget);
   });
+  testWidgets(
+      'Watchlist button should display Snackbar when removed from watchlist',
+      (WidgetTester tester) async {
+    whenListen(
+        mockBloc,
+        Stream.fromIterable([
+          MovieDetailState.initial().copyWith(
+            movieState: RequestState.Loaded,
+            movie: testMovieDetail,
+            recommendationState: RequestState.Loaded,
+            movieRecommendations: [testMovie],
+            isAddedToWatchlist: false,
+          ),
+          MovieDetailState.initial().copyWith(
+            movieState: RequestState.Loaded,
+            movie: testMovieDetail,
+            recommendationState: RequestState.Loaded,
+            movieRecommendations: [testMovie],
+            isAddedToWatchlist: false,
+            watchlistMessage: 'Removed from Watchlist',
+          ),
+        ]),
+        initialState: MovieDetailState.initial());
 
-  // testWidgets(
-  //     'Watchlist button should display AlertDialog when add to watchlist failed',
-  //     (WidgetTester tester) async {
-  //   whenListen(
-  //       mockBloc,
-  //       Stream.fromIterable([
-  //         MovieDetailState.initial().copyWith(
-  //           movieState: RequestState.Loaded,
-  //           movie: testMovieDetail,
-  //           recommendationState: RequestState.Loaded,
-  //           movieRecommendations: [testMovie],
-  //           isAddedToWatchlist: false,
-  //         ),
-  //         MovieDetailState.initial().copyWith(
-  //           movieState: RequestState.Loaded,
-  //           movie: testMovieDetail,
-  //           recommendationState: RequestState.Loaded,
-  //           movieRecommendations: [testMovie],
-  //           isAddedToWatchlist: false,
-  //           watchlistMessage: 'Failed',
-  //         ),
-  //       ]),
-  //       initialState: MovieDetailState.initial());
+    final watchlistButton = find.byType(ElevatedButton);
 
-  //   final watchlistButton = find.byIcon(Icons.add);
+    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+    await tester.pump();
 
-  //   await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
-  //   await tester.pump();
+    expect(find.byIcon(Icons.add), findsOneWidget);
 
-  //   expect(find.byIcon(Icons.add), findsOneWidget);
+    await tester.tap(watchlistButton);
+    await tester.pump();
 
-  //   await tester.tap(watchlistButton);
-  //   await tester.pump();
+    expect(find.byType(SnackBar), findsOneWidget);
+    expect(find.text('Removed from Watchlist'), findsOneWidget);
+  });
 
-  //   expect(find.byType(AlertDialog), findsOneWidget);
-  //   expect(find.text('Failed'), findsOneWidget);
-  // });
+  testWidgets(
+      'Watchlist button should display AlertDialog when add to watchlist failed',
+      (WidgetTester tester) async {
+    whenListen(
+        mockBloc,
+        Stream.fromIterable([
+          MovieDetailState.initial().copyWith(
+            movieState: RequestState.Loaded,
+            movie: testMovieDetail,
+            recommendationState: RequestState.Loaded,
+            movieRecommendations: [testMovie],
+            isAddedToWatchlist: false,
+          ),
+          MovieDetailState.initial().copyWith(
+            movieState: RequestState.Loaded,
+            movie: testMovieDetail,
+            recommendationState: RequestState.Loaded,
+            movieRecommendations: [testMovie],
+            isAddedToWatchlist: false,
+            watchlistMessage: 'Failed',
+          ),
+          MovieDetailState.initial().copyWith(
+            movieState: RequestState.Loaded,
+            movie: testMovieDetail,
+            recommendationState: RequestState.Loaded,
+            movieRecommendations: [testMovie],
+            isAddedToWatchlist: false,
+            watchlistMessage: 'Failed ',
+          ),
+        ]),
+        initialState: MovieDetailState.initial());
+
+    final watchlistButton = find.byIcon(Icons.add);
+
+    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+    await tester.pump();
+
+    expect(find.byIcon(Icons.add), findsOneWidget);
+
+    await tester.tap(watchlistButton, warnIfMissed: false);
+    await tester.pump();
+
+    expect(find.byType(AlertDialog), findsOneWidget);
+    expect(find.text('Failed'), findsOneWidget);
+  });
 }

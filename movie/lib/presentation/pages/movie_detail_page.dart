@@ -37,7 +37,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<MovieDetailBloc, MovieDetailState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.watchlistMessage ==
                   MovieDetailBloc.watchlistAddSuccessMessage ||
               state.watchlistMessage ==
@@ -45,7 +45,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.watchlistMessage)));
           } else {
-            showDialog(
+            await showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
