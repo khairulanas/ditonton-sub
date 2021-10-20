@@ -8,49 +8,49 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:movie/domain/usecases/get_top_rated_movies.dart';
-import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
-import 'top_rated_movies_bloc_test.mocks.dart';
+import 'top_rated_movie_list_bloc_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedMovies])
 void main() {
-  late TopRatedMoviesBloc popularMoviesBloc;
+  late TopRatedMovieListBloc popularMovieListBloc;
   late MockGetTopRatedMovies mockGetTopRatedMovies;
 
   setUp(() {
     mockGetTopRatedMovies = MockGetTopRatedMovies();
-    popularMoviesBloc = TopRatedMoviesBloc(mockGetTopRatedMovies);
+    popularMovieListBloc = TopRatedMovieListBloc(mockGetTopRatedMovies);
   });
   final tMovies = <Movie>[testMovie];
 
-  blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
+  blocTest<TopRatedMovieListBloc, MovieListState>(
     'should emit [TopRatedMoviesLoading,TopRatedMoviesError] when fail',
     build: () {
       when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('fail')));
-      return popularMoviesBloc;
+      return popularMovieListBloc;
     },
-    act: (bloc) => bloc.add(FetchTopRatedMoviesEvent()),
+    act: (bloc) => bloc.add(FetchMovieListEvent()),
     expect: () => [
-      TopRatedMoviesLoading(),
-      TopRatedMoviesError('fail'),
+      MovieListLoading(),
+      MovieListError('fail'),
     ],
     verify: (_) {
       verify(mockGetTopRatedMovies.execute());
     },
   );
-  blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
+  blocTest<TopRatedMovieListBloc, MovieListState>(
     'should emit [TopRatedMoviesLoading,TopRatedMoviesLoaded] when success',
     build: () {
       when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Right(tMovies));
-      return popularMoviesBloc;
+      return popularMovieListBloc;
     },
-    act: (bloc) => bloc.add(FetchTopRatedMoviesEvent()),
+    act: (bloc) => bloc.add(FetchMovieListEvent()),
     expect: () => [
-      TopRatedMoviesLoading(),
-      TopRatedMoviesLoaded(tMovies),
+      MovieListLoading(),
+      MovieListLoaded(movies: tMovies),
     ],
     verify: (_) {
       verify(mockGetTopRatedMovies.execute());

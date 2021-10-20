@@ -8,49 +8,49 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:movie/domain/usecases/get_popular_movies.dart';
-import 'package:movie/presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
+import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
-import 'popular_movies_bloc_test.mocks.dart';
+import 'popular_movie_list_bloc_test.mocks.dart';
 
 @GenerateMocks([GetPopularMovies])
 void main() {
-  late PopularMoviesBloc popularMoviesBloc;
+  late PopularMovieListBloc popularMovieListBloc;
   late MockGetPopularMovies mockGetPopularMovies;
 
   setUp(() {
     mockGetPopularMovies = MockGetPopularMovies();
-    popularMoviesBloc = PopularMoviesBloc(mockGetPopularMovies);
+    popularMovieListBloc = PopularMovieListBloc(mockGetPopularMovies);
   });
   final tMovies = <Movie>[testMovie];
 
-  blocTest<PopularMoviesBloc, PopularMoviesState>(
+  blocTest<PopularMovieListBloc, MovieListState>(
     'should emit [PopularMoviesLoading,PopularMoviesError] when fail',
     build: () {
       when(mockGetPopularMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('fail')));
-      return popularMoviesBloc;
+      return popularMovieListBloc;
     },
-    act: (bloc) => bloc.add(FetchPopularMoviesEvent()),
+    act: (bloc) => bloc.add(FetchMovieListEvent()),
     expect: () => [
-      PopularMoviesLoading(),
-      PopularMoviesError('fail'),
+      MovieListLoading(),
+      MovieListError('fail'),
     ],
     verify: (_) {
       verify(mockGetPopularMovies.execute());
     },
   );
-  blocTest<PopularMoviesBloc, PopularMoviesState>(
+  blocTest<PopularMovieListBloc, MovieListState>(
     'should emit [PopularMoviesLoading,PopularMoviesLoaded] when success',
     build: () {
       when(mockGetPopularMovies.execute())
           .thenAnswer((_) async => Right(tMovies));
-      return popularMoviesBloc;
+      return popularMovieListBloc;
     },
-    act: (bloc) => bloc.add(FetchPopularMoviesEvent()),
+    act: (bloc) => bloc.add(FetchMovieListEvent()),
     expect: () => [
-      PopularMoviesLoading(),
-      PopularMoviesLoaded(tMovies),
+      MovieListLoading(),
+      MovieListLoaded(movies: tMovies),
     ],
     verify: (_) {
       verify(mockGetPopularMovies.execute());

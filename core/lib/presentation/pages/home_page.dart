@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie/presentation/provider/movie_list_notifier.dart';
+import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/routes.dart';
@@ -28,11 +28,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() {
+      Provider.of<NowPlayingMovieListBloc>(context, listen: false)
+          .add(FetchMovieListEvent());
+      Provider.of<PopularMovieListBloc>(context, listen: false)
+          .add(FetchMovieListEvent());
+      Provider.of<TopRatedMovieListBloc>(context, listen: false)
+          .add(FetchMovieListEvent());
+    });
     Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
       ..fetchAiringTodayTvs()
       ..fetchPopularTvs()

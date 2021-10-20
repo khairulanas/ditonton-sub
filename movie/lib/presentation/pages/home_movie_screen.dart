@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
 import 'top_rated_movies_page.dart';
-import '../provider/movie_list_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 class HomeMovieScreen extends StatefulWidget {
   @override
@@ -29,14 +29,14 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> {
               'Now Playing',
               style: kHeading6,
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<NowPlayingMovieListBloc, MovieListState>(
+                builder: (context, state) {
+              if (state is MovieListLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.nowPlayingMovies);
+              } else if (state is MovieListLoaded) {
+                return MovieList(state.movies);
               } else {
                 return Text('Failed');
               }
@@ -46,14 +46,14 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> {
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.popularMoviesState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<PopularMovieListBloc, MovieListState>(
+                builder: (context, state) {
+              if (state is MovieListLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.popularMovies);
+              } else if (state is MovieListLoaded) {
+                return MovieList(state.movies);
               } else {
                 return Text('Failed');
               }
@@ -63,14 +63,14 @@ class _HomeMovieScreenState extends State<HomeMovieScreen> {
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedMoviesState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<TopRatedMovieListBloc, MovieListState>(
+                builder: (context, state) {
+              if (state is MovieListLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.topRatedMovies);
+              } else if (state is MovieListLoaded) {
+                return MovieList(state.movies);
               } else {
                 return Text('Failed');
               }
