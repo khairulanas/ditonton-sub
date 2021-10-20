@@ -1,0 +1,39 @@
+name: Tv_series_Module_Tests
+
+on:
+  push:
+    paths: 
+      - "tv_series/**"
+      - ".github/workflows/tv_series_tests.yml"
+
+  pull_request:
+    paths: 
+      - "tv_series/**"
+      - ".github/workflows/tv_series_tests.yml"
+
+jobs:
+  tests:
+    defaults:
+      run:
+        working-directory: tv_series
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.5.3
+      
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Format
+        run: flutter format --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
