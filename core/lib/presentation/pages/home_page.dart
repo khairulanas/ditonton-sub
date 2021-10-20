@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/pages/home_tv_screen.dart';
+import 'package:tv_series/presentation/provider/tv_list_notifier.dart';
 
 import '../../utils/routes.dart';
-import '../provider/tv_list_notifier.dart';
+
 import 'package:movie/presentation/pages/home_movie_screen.dart';
-import 'home_tv_screen.dart';
 import 'watchlist_movies_page.dart';
 
 class HomePage extends StatefulWidget {

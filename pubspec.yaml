@@ -49,6 +49,8 @@ dependencies:
     path: search
   movie:
     path: movie
+  tv_series:
+    path: tv_series
 
 dev_dependencies:
   mockito: ^5.0.16
