@@ -55,7 +55,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           }
         },
         listenWhen: (oldState, newState) =>
-            oldState.watchlistMessage != newState.watchlistMessage,
+            oldState.watchlistMessage != newState.watchlistMessage &&
+            newState.watchlistMessage != '',
         builder: (context, state) {
           if (state.movieState == RequestState.Loading) {
             return Center(

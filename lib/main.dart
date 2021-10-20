@@ -1,7 +1,9 @@
+import 'package:tv_series/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
 import 'package:tv_series/presentation/pages/airing_today_tvs_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_list_bloc/tv_list_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
@@ -15,12 +17,7 @@ import 'package:tv_series/presentation/pages/top_rated_tvs_page.dart';
 import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 import 'package:tv_series/presentation/pages/tv_season_episodes_page.dart';
 import 'package:core/presentation/pages/watchlist_movies_page.dart';
-import 'package:tv_series/presentation/provider/airing_today_tvs_notifier.dart';
 import 'package:movie/presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
-import 'package:tv_series/presentation/provider/popular_tvs_notifier.dart';
-import 'package:tv_series/presentation/provider/top_rated_tvs_notifier.dart';
-import 'package:tv_series/presentation/provider/tv_detail_notifier.dart';
-import 'package:tv_series/presentation/provider/tv_list_notifier.dart';
 import 'package:tv_series/presentation/provider/tv_season_episodes_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
@@ -44,9 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // movie
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieListNotifier>(),
-        // ),
+
         BlocProvider(
           create: (_) => di.locator<NowPlayingMovieListBloc>(),
         ),
@@ -56,30 +51,22 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<TopRatedMovieListBloc>(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieDetailNotifier>(),
-        // ),
+
         BlocProvider(
           create: (_) => di.locator<MovieDetailBloc>(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<MovieSearchNotifier>(),
-        // ),
+
         BlocProvider(
           create: (_) => di.locator<MovieSearchBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSearchBloc>(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        // ),
+
         BlocProvider(
           create: (_) => di.locator<TopRatedMoviesBloc>(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<PopularMoviesNotifier>(),
-        // ),
+
         BlocProvider(
           create: (_) => di.locator<PopularMoviesBloc>(),
         ),
@@ -88,24 +75,20 @@ class MyApp extends StatelessWidget {
         ),
 
         // tv series
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
+
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvListBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvListBloc>(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => di.locator<TvSearchNotifier>(),
-        // ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<AiringTodayTvListBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<AiringTodayTvsNotifier>(),
-        ),
+
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),

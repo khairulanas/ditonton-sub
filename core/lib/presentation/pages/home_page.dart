@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_list_bloc/tv_list_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tv_series/presentation/pages/home_tv_screen.dart';
-import 'package:tv_series/presentation/provider/tv_list_notifier.dart';
 
 import '../../utils/routes.dart';
 
@@ -37,10 +37,14 @@ class _HomePageState extends State<HomePage> {
       Provider.of<TopRatedMovieListBloc>(context, listen: false)
           .add(FetchMovieListEvent());
     });
-    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchAiringTodayTvs()
-      ..fetchPopularTvs()
-      ..fetchTopRatedTvs());
+    Future.microtask(() {
+      Provider.of<AiringTodayTvListBloc>(context, listen: false)
+          .add(FetchTvListEvent());
+      Provider.of<PopularTvListBloc>(context, listen: false)
+          .add(FetchTvListEvent());
+      Provider.of<TopRatedTvListBloc>(context, listen: false)
+          .add(FetchTvListEvent());
+    });
   }
 
   @override

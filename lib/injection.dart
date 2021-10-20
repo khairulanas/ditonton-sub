@@ -31,13 +31,10 @@ import 'package:movie/presentation/bloc/popular_movies_bloc/popular_movies_bloc.
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:search/domain/usecases/search_movies.dart';
 import 'package:search/domain/usecases/search_tvs.dart';
-import 'package:tv_series/presentation/provider/airing_today_tvs_notifier.dart';
+import 'package:tv_series/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_list_bloc/tv_list_bloc.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
-import 'package:tv_series/presentation/provider/popular_tvs_notifier.dart';
-import 'package:tv_series/presentation/provider/top_rated_tvs_notifier.dart';
-import 'package:tv_series/presentation/provider/tv_detail_notifier.dart';
-import 'package:tv_series/presentation/provider/tv_list_notifier.dart';
 import 'package:tv_series/presentation/provider/tv_season_episodes_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
@@ -47,7 +44,7 @@ import 'package:get_it/get_it.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // bloc
+  // search module bloc
   locator.registerFactory(
     () => MovieSearchBloc(
       locator(),
@@ -87,8 +84,6 @@ void init() {
     ),
   );
 
-  // Movie provider
-
   locator.registerFactory(
     () => TopRatedMoviesBloc(
       locator(),
@@ -99,39 +94,31 @@ void init() {
       getWatchlistMovies: locator(),
     ),
   );
-  // Tv provider
-  locator.registerFactory(
-    () => TvListNotifier(
-      getAiringTodayTvs: locator(),
-      getPopularTvs: locator(),
-      getTopRatedTvs: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvDetailNotifier(
-      getTvDetail: locator(),
-      getTvRecommendations: locator(),
-      getWatchListStatusTv: locator(),
-      saveWatchlistTv: locator(),
-      removeWatchlistTv: locator(),
-    ),
-  );
+  // Tv bloc
 
   locator.registerFactory(
-    () => PopularTvsNotifier(
+    () => TopRatedTvListBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => AiringTodayTvsNotifier(
+    () => AiringTodayTvListBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedTvsNotifier(
-      getTopRatedTvs: locator(),
+    () => PopularTvListBloc(
+      locator(),
     ),
   );
+  locator.registerFactory(() => TvDetailBloc(
+        getTvDetail: locator(),
+        getTvRecommendations: locator(),
+        getWatchListStatus: locator(),
+        saveWatchlistTv: locator(),
+        removeWatchlistTv: locator(),
+      ));
+
   locator.registerFactory(
     () => WatchlistTvNotifier(
       getWatchlistTvs: locator(),
