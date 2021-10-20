@@ -1,4 +1,5 @@
 import 'package:tv_series/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_season_episode_bloc/tv_season_episode_bloc.dart';
 import 'package:tv_series/presentation/pages/airing_today_tvs_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
@@ -18,7 +19,6 @@ import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 import 'package:tv_series/presentation/pages/tv_season_episodes_page.dart';
 import 'package:core/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie/presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
-import 'package:tv_series/presentation/provider/tv_season_episodes_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,8 +92,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeasonEpisodesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvSeasonEpisodeBloc>(),
         ),
       ],
       child: MaterialApp(

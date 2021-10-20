@@ -35,7 +35,7 @@ import 'package:tv_series/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_list_bloc/tv_list_bloc.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
-import 'package:tv_series/presentation/provider/tv_season_episodes_notifier.dart';
+import 'package:tv_series/presentation/bloc/tv_season_episode_bloc/tv_season_episode_bloc.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
@@ -125,8 +125,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvSeasonEpisodesNotifier(
-      getTvSeasonEpisodes: locator(),
+    () => TvSeasonEpisodeBloc(
+      locator(),
     ),
   );
 

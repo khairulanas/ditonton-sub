@@ -1,7 +1,6 @@
-import 'package:core/core.dart';
 import 'package:core/presentation/widgets/episode_card.dart';
-
-import '../provider/tv_season_episodes_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_season_episode_bloc/tv_season_episode_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +27,9 @@ class _TvSeasonEpisodesPageState extends State<TvSeasonEpisodesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TvSeasonEpisodesNotifier>(context, listen: false)
-            .fetchTvSeasonEpisode(widget.idTv, widget.seasonNumber));
+        Provider.of<TvSeasonEpisodeBloc>(context, listen: false).add(
+            FetchTvSeasonEpisodeEvent(
+                idTv: widget.idTv, seasonNumber: widget.seasonNumber)));
   }
 
   @override
@@ -41,25 +41,25 @@ class _TvSeasonEpisodesPageState extends State<TvSeasonEpisodesPage> {
       )),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TvSeasonEpisodesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<TvSeasonEpisodeBloc, TvSeasonEpisodeState>(
+          builder: (context, state) {
+            if (state is TvSeasonEpisodeLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is TvSeasonEpisodeLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final episode = data.seasonEpisodes[index];
+                  final episode = state.tvEpisode[index];
                   return EpisodeCard(episode);
                 },
-                itemCount: data.seasonEpisodes.length,
+                itemCount: state.tvEpisode.length,
               );
             } else {
               return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+                  key: Key('error_message'),
+                  child: Text(
+                      state is TvSeasonEpisodeError ? state.message : 'empty'));
             }
           },
         ),
