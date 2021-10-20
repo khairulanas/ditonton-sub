@@ -36,8 +36,8 @@ import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart
 import 'package:tv_series/presentation/bloc/tv_list_bloc/tv_list_bloc.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_season_episode_bloc/tv_season_episode_bloc.dart';
-import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:core/presentation/bloc/watchlist_movies_bloc/watchlist_movies_bloc.dart';
+import 'package:core/presentation/bloc/watchlist_tvs_bloc/watchlist_tvs_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -90,8 +90,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
+    () => WatchlistMoviesBloc(
+      locator(),
     ),
   );
   // Tv bloc
@@ -120,8 +120,8 @@ void init() {
       ));
 
   locator.registerFactory(
-    () => WatchlistTvNotifier(
-      getWatchlistTvs: locator(),
+    () => WatchlistTvsBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
